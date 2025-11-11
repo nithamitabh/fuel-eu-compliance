@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Generate Prisma schema for: Route, ShipCompliance, BankEntry, Pool, PoolMember. Use snake_case for table names.
+
+model Route {
+  route_id         String   @id @default(uuid())
+  vessel_type      String
+  fuel_type        String
+  year             Int
+  ghg_intensity    Float
+  fuel_consumption Float
+  distance         Float
+  total_emissions  Float
+  is_baseline      Boolean  @default(false)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  @@map("routes")
+  @@index([year])
+  @@index([is_baseline])
+}
+
+model ShipCompliance {
+  compliance_id     String   @id @default(uuid())
+  ship_id           String
+  year              Int
+  compliance_balance Float
+  status            String   // 'surplus' | 'deficit' | 'compliant'
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  @@unique([ship_id, year])
+  @@map("ship_compliance")
+  @@index([ship_id])
+  @@index([year])
+  @@index([status])
+}
+
+model BankingRecord {
+  banking_id     String   @id @default(uuid())
+  ship_id        String
+  year           Int
+  banked_amount  Float
+  expiry_year    Int
+  is_expired     Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  @@unique([ship_id, year])
+  @@map("banking_records")
+  @@index([ship_id])
+  @@index([expiry_year])
+  @@index([is_expired])
+}
+
+model Pool {
+  pool_id       String       @id @default(uuid())
+  pool_name     String
+  year          Int
+  member_ships  String[]     // Array of ship IDs
+  total_balance Float
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
+  
+  members       PoolMember[]
+
+  @@map("pools")
+  @@index([year])
+  @@index([pool_name])
+}
+
+model PoolMember {
+  member_id            String   @id @default(uuid())
+  pool_id              String
+  ship_id              String
+  contribution_balance Float
+  allocated_deficit    Float
+  joined_at            DateTime @default(now())
+  
+  pool                 Pool     @relation(fields: [pool_id], references: [pool_id], onDelete: Cascade)
+
+  @@map("pool_members")
+  @@index([pool_id])
+  @@index([ship_id])
+}
