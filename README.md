@@ -193,9 +193,47 @@ npm run test:coverage
 ```bash
 cd frontend
 
-# Run tests (configure with Vitest or React Testing Library)
+# Run all tests
 npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with UI
+npm run test:ui
+
+# Generate coverage report
+npm run test:coverage
 ```
+
+**Test Coverage**:
+- ✅ **40 tests** passing (8 test files)
+- ✅ **46.5% overall coverage**, 100% on core tested components
+- ✅ Testing Stack: Vitest + @testing-library/react + jsdom
+
+**Test Files**:
+
+*Hook Tests (4 files):*
+- `useRoutes.test.ts` - 5 tests (100% coverage)
+- `useComparison.test.ts` - 5 tests (100% coverage)
+- `useBanking.test.ts` - 5 tests
+- `usePooling.test.ts` - 5 tests
+
+*Component Tests (4 files):*
+- `RoutesTab.test.tsx` - 6 tests (82% coverage)
+- `CompareTab.test.tsx` - 8 tests (100% coverage)
+- `BankingTab.test.tsx` - 3 tests
+- `PoolingTab.test.tsx` - 3 tests
+
+**Features Tested**:
+- ✅ Loading states
+- ✅ Error handling
+- ✅ Data rendering
+- ✅ Empty states
+- ✅ Defensive programming (null/undefined handling)
+- ✅ API mocking
+- ✅ Custom hook mocking
+- ✅ Chart component mocking (Recharts)
 
 ## 📚 API Documentation
 

@@ -5,9 +5,10 @@ Backend service for FuelEU Maritime compliance tracking using hexagonal architec
 ## Architecture
 
 This project follows hexagonal (ports & adapters) architecture:
+
 - **Core Domain**: Business entities and logic (zero framework dependencies)
 - **Ports**: Repository interfaces
-- **Adapters**: 
+- **Adapters**:
   - Inbound: HTTP (Express routers)
   - Outbound: PostgreSQL (Prisma repositories)
 - **Infrastructure**: Server setup and dependency injection
@@ -81,6 +82,7 @@ npm test
 ```
 
 Current coverage:
+
 - ✅ ComputeComplianceBalanceUseCase: 4 tests
 - ✅ BankSurplusUseCase: 4 tests
 - ✅ ApplyBankedSurplusUseCase: 4 tests
@@ -140,30 +142,35 @@ This creates 5 sample routes with different vessel types and fuel types.
 ## API Endpoints
 
 ### Health Check
+
 - `GET /health` - Server health status
 
 ### Routes
+
 - `GET /api/routes` - Get all routes
 - `GET /api/routes/:id` - Get route by ID
 - `POST /api/routes/:id/baseline` - Set route as baseline
 - `GET /api/routes/comparison/data` - Get baseline vs comparisons
 
 ### Compliance
+
 - `GET /api/compliance/ship/:shipId/year/:year` - Get compliance by ship and year
 - `POST /api/compliance/compute` - Compute compliance balance
 - `GET /api/compliance/ship/:shipId` - Get all compliance for ship
 - `GET /api/compliance/year/:year` - Get all compliance for year
 
-### Banking (Article 20)
+### Banking Operations (Article 20)
+
 - `POST /api/banking/bank-surplus` - Bank compliance surplus
 - `POST /api/banking/apply-banked` - Apply banked surplus
 
 ### Pools (Article 21)
+
 - `POST /api/pools/create` - Create compliance pool
 
 ## Project Structure
 
-```
+```text
 backend/
 ├── prisma/
 │   ├── schema.prisma          # Database schema
@@ -198,11 +205,12 @@ npm run db:seed          # Seed database
 
 ### Compliance Balance Formula
 
-```
+```text
 CB = (TARGET_INTENSITY - ghgIntensity) × fuelConsumption × ENERGY_PER_TON
 ```
 
 Where:
+
 - `TARGET_INTENSITY = 89.3368` gCO₂eq/MJ
 - `ENERGY_PER_TON = 41000` MJ/ton
 
