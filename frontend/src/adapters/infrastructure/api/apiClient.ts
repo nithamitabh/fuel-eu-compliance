@@ -49,7 +49,7 @@ export class ApiError extends Error {
 export class ApiClient implements IComplianceApi {
   private axiosInstance: AxiosInstance;
 
-  constructor(baseURL: string = 'http://localhost:3001/api') {
+  constructor(baseURL: string = 'http://localhost:3000/api') {
     this.axiosInstance = axios.create({
       baseURL,
       timeout: 10000,
@@ -89,23 +89,23 @@ export class ApiClient implements IComplianceApi {
   // ==================== Routes Endpoints ====================
 
   async getRoutes(): Promise<Route[]> {
-    const response = await this.axiosInstance.get<Route[]>('/routes');
-    return response.data;
+    const response = await this.axiosInstance.get<{ success: boolean; data: Route[] }>('/routes');
+    return response.data.data;
   }
 
   async getRouteById(routeId: string): Promise<Route> {
-    const response = await this.axiosInstance.get<Route>(`/routes/${routeId}`);
-    return response.data;
+    const response = await this.axiosInstance.get<{ success: boolean; data: Route }>(`/routes/${routeId}`);
+    return response.data.data;
   }
 
   async createRoute(data: RouteCreateInput): Promise<Route> {
-    const response = await this.axiosInstance.post<Route>('/routes', data);
-    return response.data;
+    const response = await this.axiosInstance.post<{ success: boolean; data: Route }>('/routes', data);
+    return response.data.data;
   }
 
   async updateRoute(routeId: string, data: RouteUpdateInput): Promise<Route> {
-    const response = await this.axiosInstance.put<Route>(`/routes/${routeId}`, data);
-    return response.data;
+    const response = await this.axiosInstance.put<{ success: boolean; data: Route }>(`/routes/${routeId}`, data);
+    return response.data.data;
   }
 
   async deleteRoute(routeId: string): Promise<void> {
@@ -113,92 +113,92 @@ export class ApiClient implements IComplianceApi {
   }
 
   async getRouteComparison(): Promise<Route[]> {
-    const response = await this.axiosInstance.get<Route[]>('/routes/comparison/data');
-    return response.data;
+    const response = await this.axiosInstance.get<{ success: boolean; data: Route[] }>('/routes/comparison/data');
+    return response.data.data;
   }
 
   // ==================== Compliance Endpoints ====================
 
   async getShipCompliance(shipId: string, year: number): Promise<ShipCompliance> {
-    const response = await this.axiosInstance.get<ShipCompliance>(
+    const response = await this.axiosInstance.get<{ success: boolean; data: ShipCompliance }>(
       `/compliance/ship/${shipId}/year/${year}`
     );
-    return response.data;
+    return response.data.data;
   }
 
   async computeCompliance(data: ComputeComplianceInput): Promise<ComputeComplianceResult> {
-    const response = await this.axiosInstance.post<ComputeComplianceResult>(
+    const response = await this.axiosInstance.post<{ success: boolean; data: ComputeComplianceResult }>(
       '/compliance/compute',
       data
     );
-    return response.data;
+    return response.data.data;
   }
 
   async getShipComplianceHistory(shipId: string): Promise<ShipCompliance[]> {
-    const response = await this.axiosInstance.get<ShipCompliance[]>(
+    const response = await this.axiosInstance.get<{ success: boolean; data: ShipCompliance[] }>(
       `/compliance/ship/${shipId}`
     );
-    return response.data;
+    return response.data.data;
   }
 
   async getYearCompliance(year: number): Promise<ShipCompliance[]> {
-    const response = await this.axiosInstance.get<ShipCompliance[]>(
+    const response = await this.axiosInstance.get<{ success: boolean; data: ShipCompliance[] }>(
       `/compliance/year/${year}`
     );
-    return response.data;
+    return response.data.data;
   }
 
   // ==================== Banking Endpoints ====================
 
   async getBankingRecords(shipId: string): Promise<BankingRecord[]> {
-    const response = await this.axiosInstance.get<BankingRecord[]>(
+    const response = await this.axiosInstance.get<{ success: boolean; data: BankingRecord[] }>(
       `/banking/ship/${shipId}`
     );
-    return response.data;
+    return response.data.data;
   }
 
   async bankSurplus(data: BankSurplusInput): Promise<BankingResult> {
-    const response = await this.axiosInstance.post<BankingResult>('/banking/bank', data);
-    return response.data;
+    const response = await this.axiosInstance.post<{ success: boolean; data: BankingResult }>('/banking/bank', data);
+    return response.data.data;
   }
 
   async applyBankedSurplus(data: ApplyBankedSurplusInput): Promise<ShipCompliance> {
-    const response = await this.axiosInstance.post<ShipCompliance>(
+    const response = await this.axiosInstance.post<{ success: boolean; data: ShipCompliance }>(
       '/banking/apply',
       data
     );
-    return response.data;
+    return response.data.data;
   }
 
   async getAvailableSurplus(shipId: string): Promise<BankingRecord[]> {
-    const response = await this.axiosInstance.get<BankingRecord[]>(
+    const response = await this.axiosInstance.get<{ success: boolean; data: BankingRecord[] }>(
       `/banking/ship/${shipId}/available`
     );
-    return response.data;
+    return response.data.data;
   }
 
   // ==================== Pool Endpoints ====================
 
   async getPools(): Promise<Pool[]> {
-    const response = await this.axiosInstance.get<Pool[]>('/pools');
-    return response.data;
+    const response = await this.axiosInstance.get<{ success: boolean; data: Pool[] }>('/pools');
+    return response.data.data;
   }
 
   async getPoolById(poolId: string): Promise<PoolResult> {
-    const response = await this.axiosInstance.get<PoolResult>(`/pools/${poolId}`);
-    return response.data;
+    const response = await this.axiosInstance.get<{ success: boolean; data: PoolResult }>(`/pools/${poolId}`);
+    return response.data.data;
   }
 
   async createPool(data: CreatePoolInput): Promise<PoolResult> {
-    const response = await this.axiosInstance.post<PoolResult>('/pools', data);
-    return response.data;
+    const response = await this.axiosInstance.post<{ success: boolean; data: PoolResult }>('/pools', data);
+    return response.data.data;
   }
 
   async getPoolMembers(poolId: string): Promise<PoolMember[]> {
-    const response = await this.axiosInstance.get<PoolMember[]>(
+    const response = await this.axiosInstance.get<{ success: boolean; data: PoolMember[] }>(
       `/pools/${poolId}/members`
     );
-    return response.data;
+    return response.data.data;
   }
 }
 
