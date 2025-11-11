@@ -15,9 +15,9 @@ export function Layout() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white dark:from-gray-900 dark:to-gray-800 flex flex-col">
       {/* Header with Marine Theme */}
-      <header className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 shadow-lg">
+      <header className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 shadow-lg flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -56,7 +56,7 @@ export function Layout() {
       </header>
 
       {/* Tab Navigation with Marine Theme */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-shrink-0">
         <nav className="flex space-x-2 mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-2 border border-gray-200 dark:border-gray-700">
           {tabs.map((tab) => (
             <NavLink
@@ -78,12 +78,12 @@ export function Layout() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
         <Outlet />
       </main>
 
       {/* Footer with Marine Theme */}
-      <footer className="mt-16 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-t border-gray-700">
+      <footer className="mt-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-t border-gray-700 flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-3">

@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 
 export function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white flex flex-col">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+      <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
           <div className="text-center space-y-8">
             {/* Navigation Icon */}
@@ -57,7 +57,7 @@ export function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-amber-50">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-amber-50 flex-grow">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
@@ -216,7 +216,7 @@ export function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12">
+      <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 flex-shrink-0 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-3">
