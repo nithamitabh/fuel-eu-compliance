@@ -1,11 +1,92 @@
-# React + TypeScript + Vite
+# FuelEU Maritime Compliance - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript frontend application for FuelEU Maritime Regulation compliance management.
 
-Currently, two official plugins are available:
+## 🏗️ Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project follows **Hexagonal Architecture** (Ports & Adapters pattern).
+
+## 📦 Tech Stack
+
+- **React** - UI library
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Build tool and dev server
+- **TailwindCSS** - Utility-first CSS framework
+- **Axios** - HTTP client for API communication
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Backend API running on `http://localhost:3001`
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 📚 Custom Hooks
+
+All hooks are located in `src/core/application/`:
+
+### useRoutes
+```typescript
+const { routes, loading, error, refetch } = useRoutes();
+```
+
+### useComparison
+```typescript
+const { comparisonData, loading, error, refetch } = useComparison();
+```
+
+### useCompliance
+```typescript
+const { computeCompliance, complianceData, loading, error } = useCompliance();
+```
+
+### useBanking
+```typescript
+const { bankSurplus, applyBankedSurplus, loading, error } = useBanking();
+```
+
+### usePooling
+```typescript
+const { createPool, pools, loading, error } = usePooling();
+```
+
+## 🎯 Demo Component
+
+Run the demo to test all hooks:
+
+```tsx
+// In App.tsx
+import { DemoHooks } from './DemoHooks';
+
+function App() {
+  return <DemoHooks />;
+}
+```
+
+## 📖 Documentation
+
+
+- **PHASE3_COMPLETE.md** - Detailed completion summary with examples
+- **Backend API** - See `../backend/README.md`
+
+---
+
+**Status**: Phase 3 Complete ✅  
+**Next**: Phase 4 - UI Components & Pages
+
 
 ## React Compiler
 
