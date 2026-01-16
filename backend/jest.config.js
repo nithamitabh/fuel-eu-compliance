@@ -19,4 +19,5 @@ module.exports = {
   moduleNameMapper: {
     '^uuid$': require.resolve('uuid'),
   },
+  testTimeout: 10000, // 10 seconds for integration tests
 };

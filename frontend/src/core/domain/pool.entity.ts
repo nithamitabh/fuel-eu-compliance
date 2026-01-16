@@ -18,9 +18,8 @@ export type PoolMember = {
   poolId: string;
   shipId: string;
   contributionBalance: number;
-  allocatedSurplus: number;
-  createdAt: Date;
-  updatedAt: Date;
+  allocatedDeficit: number;  // Changed from allocatedSurplus to match backend
+  joinedAt: Date;  // Changed from createdAt/updatedAt to match backend
 };
 
 export type CreatePoolInput = {

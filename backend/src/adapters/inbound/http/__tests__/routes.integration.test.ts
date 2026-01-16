@@ -6,24 +6,19 @@ import { App } from '../../../../infrastructure/server/app';
  * Integration Tests for Routes API
  * 
  * NOTE: These tests require a PostgreSQL database to be running.
- * Set DATABASE_URL environment variable before running:
- * DATABASE_URL="postgresql://user:password@localhost:5432/test_db" npm test integration
- * 
- * To skip these tests, run: npm test -- --testPathIgnorePatterns=integration
+ * Set DATABASE_URL environment variable before running.
  */
 
-const shouldRunIntegrationTests = process.env.DATABASE_URL !== undefined;
-
-describe.skip('Routes API Integration Tests', () => {
+describe('Routes API Integration Tests', () => {
   let app: App;
 
   beforeAll(() => {
     app = new App();
-  });
+  }, 10000); // 10 second timeout for setup
 
   afterAll(async () => {
     await app.disconnect();
-  });
+  }, 10000); // 10 second timeout for teardown
 
   describe('GET /api/routes', () => {
     it('should return all routes', async () => {

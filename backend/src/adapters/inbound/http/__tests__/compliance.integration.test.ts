@@ -6,22 +6,19 @@ import { App } from '../../../../infrastructure/server/app';
  * Integration Tests for Compliance API
  * 
  * NOTE: These tests require a PostgreSQL database to be running.
- * Set DATABASE_URL environment variable before running:
- * DATABASE_URL="postgresql://user:password@localhost:5432/test_db" npm test integration
- * 
- * To skip these tests, run: npm test -- --testPathIgnorePatterns=integration
+ * Set DATABASE_URL environment variable before running.
  */
 
-describe.skip('Compliance API Integration Tests', () => {
+describe('Compliance API Integration Tests', () => {
   let app: App;
 
   beforeAll(() => {
     app = new App();
-  });
+  }, 10000); // 10 second timeout for setup
 
   afterAll(async () => {
     await app.disconnect();
-  });
+  }, 10000); // 10 second timeout for teardown
 
   describe('GET /api/compliance/ship/:shipId/year/:year', () => {
     it('should return 404 for non-existent compliance record', async () => {
